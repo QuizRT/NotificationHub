@@ -2,10 +2,13 @@ version: "3"
 services: 
   notificationsdb:
     environment:
+      ACCEPT_EULA: "Y"
       SA_Password: Passwordqwerty
     image: microsoft/mssql-server-linux
   notifications:
     build: ./
+    labels:
+      SERVICE_NAME: NotificationService
     environment:
       SQLSERVER_HOST: Server=notificationsdb;User=sa;Password:Passwordqwerty
     links:
