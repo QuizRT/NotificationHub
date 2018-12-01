@@ -1,0 +1,14 @@
+version: "3"
+services: 
+  notificationsdb:
+    environment:
+      SA_Password: Passwordqwerty
+    image: microsoft/mssql-server-linux
+  notifications:
+    build: ./
+    environment:
+      SQLSERVER_HOST: Server=notificationsdb;User=sa;Password:Passwordqwerty
+    links:
+      - notificationsdb
+    ports: 
+      - "8088:5000"

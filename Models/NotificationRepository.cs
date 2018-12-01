@@ -19,9 +19,19 @@ namespace NotificationHub.Models
 			return notifications;
 		}
 
-		// public Notification CreateNotification()
-		// {
+        Task<Notification> INotificationRepository.CreateNotification(Notification notification)
+        {
+            throw new NotImplementedException();
+        }
 
-		// }
-	}
+        Task<IEnumerable<Notification>> INotificationRepository.GetNotifications(string UserId)
+        {
+            throw new NotImplementedException();
+        }
+
+        // public Notification CreateNotification()
+        // {
+
+        // }
+    }
 }

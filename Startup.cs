@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Notifications.Hubs;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+using NotificationHub.Models;
 
 namespace NotificationHub
 {
@@ -28,6 +30,9 @@ namespace NotificationHub
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            var connString = Environment.GetEnvironmentVariable("SQLSERVER_HOST") ?? "Server=localhost\\SQLEXPRESS;Database=NotificationDb;Trusted_Connection=True;";
+            services.AddDbContext<NotificationContext>(option => option.UseSqlServer(connString));
+            services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddCors (o => o.AddPolicy ("CorsPolicy", builder => {
                builder
                    .AllowAnyMethod ()
