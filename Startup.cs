@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Notifications.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 namespace NotificationHub
 {
@@ -26,6 +28,14 @@ namespace NotificationHub
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCors (o => o.AddPolicy ("CorsPolicy", builder => {
+               builder
+                   .AllowAnyMethod ()
+                   .AllowAnyHeader ()
+                   .AllowCredentials ()
+                   .AllowAnyOrigin();
+           }));
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,7 +50,13 @@ namespace NotificationHub
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+           
+            app.UseCors ("CorsPolicy");
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<NotificationsHub>("/notifications");
+            });
+             app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
