@@ -30,7 +30,7 @@ services:
   #     RABBITMQ_DEFAULT_PASS: "rabbitmq"
   #   networks: 
   #     - notification-service-network
-networks: :
+networks:
   notification-service-network:
     name: quizrt-network
     external: true
