@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "NotificationHub": {
+    "NotificationEngine": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/values",
