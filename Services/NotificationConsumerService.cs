@@ -46,6 +46,7 @@ namespace NotificationEngine.Services
 				Console.WriteLine("Consumed");
                 var body = ea.Body;
                 var notificationMessageAsJson = Encoding.UTF8.GetString(body);
+				Console.WriteLine(notificationMessageAsJson);
 				var notification = Notification.ToObject(notificationMessageAsJson);
                 Console.WriteLine(notificationMessageAsJson);
                 Console.WriteLine(" [x] Received {0}", notificationMessageAsJson);
