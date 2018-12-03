@@ -33,6 +33,7 @@ namespace NotificationEngine.Services
 				_context.UserNotifications.Add(userNotification);
 			}
 			await _context.SaveChangesAsync();
+			Console.WriteLine("Notification Saved");
         }
     }
 }

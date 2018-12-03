@@ -21,7 +21,7 @@ namespace Notifications.Controllers
             this.notificationObject = _notificationObject;
         }
 
-        [HttpGet]
+        [HttpGet("notifications")]
         [Route("notifications/{UserId}")]
         public async Task<IActionResult> GetNotifications(string UserId)
         {
