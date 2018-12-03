@@ -23,7 +23,15 @@ namespace NotificationEngine.Models
 
 		public static Notification ToObject(string notification)
 		{
-			return JsonConvert.DeserializeObject<Notification>(notification);
+			try 
+			{
+				return JsonConvert.DeserializeObject<Notification>(notification);
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+				return new Notification();
+			} 
 		}
 	}
 }

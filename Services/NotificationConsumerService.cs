@@ -55,7 +55,7 @@ namespace NotificationEngine.Services
                 Console.WriteLine(notificationMessageAsJson);
                 Console.WriteLine(" [x] Received {0}", notificationMessageAsJson);
 				Console.WriteLine("notification", notification);
-
+			
 				await _notificationService.CreateNotification(notification);
 				_broadcaster.BroadcastNotifications(notification);
             };
