@@ -3,15 +3,21 @@ services:
   notificationsdb:
     environment:
       ACCEPT_EULA: "Y"
-      SA_Password: Passwordqwerty
+      SA_PASSWORD: yourStrong(!)Password
     image: microsoft/mssql-server-linux
   notifications:
     build: ./
     labels:
       SERVICE_NAME: NotificationService
     environment:
-      SQLSERVER_HOST: Server=notificationsdb;User=sa;Password:Passwordqwerty
-    links:
+      SQLSERVER_HOST: Server=notificationsdb;User=sa;Password=yourStrong(!)Password
+    depends_on:
+      - rabbitmq
       - notificationsdb
     ports: 
-      - "8088:5000"
+      - "5000:5000"
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    environment:
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"

@@ -5,8 +5,8 @@ WORKDIR /Notifications
 
 COPY . .
 
-CMD dotnet restore
-
+RUN dotnet restore
 RUN dotnet build
+RUN chmod +x ./entrypoint.sh
 
-RUN dotnet run
+CMD /bin/bash ./entrypoint.sh
