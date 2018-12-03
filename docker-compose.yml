@@ -14,22 +14,11 @@ services:
     environment:
       SQLSERVER_HOST: Server=notificationsdb;User=sa;Password=yourStrong(!)Password
     depends_on:
-      - rabbitmq
       - notificationsdb
     ports: 
       - "5000:5000"
     networks: 
       - notification-service-network
-  # rabbitmq:
-  #   image: "rabbitmq:3-management"
-  #   ports:
-  #     - "15673:15672"
-  #     - "5673:5672"
-  #   environment:
-  #     RABBITMQ_DEFAULT_USER: "rabbitmq"
-  #     RABBITMQ_DEFAULT_PASS: "rabbitmq"
-  #   networks: 
-  #     - notification-service-network
 networks:
   notification-service-network:
     name: quizrt-network
