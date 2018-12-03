@@ -43,6 +43,7 @@ namespace NotificationEngine.Services
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += (model, ea) =>
             {
+				Console.WriteLine("Consumed");
                 var body = ea.Body;
                 var notificationMessageAsJson = Encoding.UTF8.GetString(body);
 				var notification = Notification.ToObject(notificationMessageAsJson);
