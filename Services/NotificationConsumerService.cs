@@ -55,8 +55,8 @@ namespace NotificationEngine.Services
                 Console.WriteLine(notificationMessageAsJson);
                 Console.WriteLine(" [x] Received {0}", notificationMessageAsJson);
 
-				_broadcaster.BroadcastNotifications(notification);
 				_notificationService.CreateNotification(notification);
+				_broadcaster.BroadcastNotifications(notification);
             };
 
             channel.BasicConsume(queue: "Notification", autoAck: true, consumer: consumer);
