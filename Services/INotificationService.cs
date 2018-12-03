@@ -7,7 +7,7 @@ namespace NotificationEngine.Services
 {
 	public interface ICreateNotificationService
 	{
-		Task<Notification> CreateNotification(Notification notification);
+		Task CreateNotification(Notification notification);
 	}
 
 	public interface IReadNotificationService

@@ -20,9 +20,19 @@ namespace NotificationEngine.Services
 			return notifications;
 		}
 
-        public Task<Notification> CreateNotification(Notification notification)
+        public async Task CreateNotification(Notification notification)
         {
-            throw new NotImplementedException();
+            foreach (var user in notification.Users)
+			{
+				var userNotification = new UserNotification()
+				{
+					Notification = notification,
+					UserId = user,
+					HasRead = false,
+				};
+				_context.UserNotifications.Add(userNotification);
+			}
+			await _context.SaveChangesAsync();
         }
     }
 }

@@ -14,6 +14,8 @@ namespace NotificationEngine.Services
 	public class NotificationConsumerService
 	{
 		private NotificationBroadcaster _broadcaster;
+		private NotificationService _notificationService;
+
 		public NotificationConsumerService(NotificationBroadcaster broadcaster, ICreateNotificationService notificationService)
 		{
 			Console.WriteLine("Consumer Service");
@@ -54,6 +56,7 @@ namespace NotificationEngine.Services
                 Console.WriteLine(" [x] Received {0}", notificationMessageAsJson);
 
 				_broadcaster.BroadcastNotifications(notification);
+				_notificationService.CreateNotification(notification);
             };
 
             channel.BasicConsume(queue: "Notification", autoAck: true, consumer: consumer);
