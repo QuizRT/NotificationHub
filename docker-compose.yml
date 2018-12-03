@@ -5,6 +5,8 @@ services:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: yourStrong(!)Password
     image: microsoft/mssql-server-linux
+    networks:
+      - notification-service-network
   notifications:
     build: ./
     labels:
@@ -16,8 +18,19 @@ services:
       - notificationsdb
     ports: 
       - "5000:5000"
-  rabbitmq:
-    image: "rabbitmq:3-management"
-    environment:
-      RABBITMQ_DEFAULT_USER: "rabbitmq"
-      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+    networks: 
+      - notification-service-network
+  # rabbitmq:
+  #   image: "rabbitmq:3-management"
+  #   ports:
+  #     - "15673:15672"
+  #     - "5673:5672"
+  #   environment:
+  #     RABBITMQ_DEFAULT_USER: "rabbitmq"
+  #     RABBITMQ_DEFAULT_PASS: "rabbitmq"
+  #   networks: 
+  #     - notification-service-network
+networks: :
+  notification-service-network:
+    name: quizrt-network
+    external: true
