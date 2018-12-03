@@ -22,6 +22,7 @@ namespace NotificationEngine.Services
 
         public async Task CreateNotification(Notification notification)
         {
+			Console.WriteLine("Notification Saved");
             foreach (var user in notification.Users)
 			{
 				var userNotification = new UserNotification()
