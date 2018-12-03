@@ -44,7 +44,7 @@ namespace NotificationEngine.Services
 			);
 
             var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (model, ea) =>
+            consumer.Received += async (model, ea) =>
             {
 				Console.WriteLine("Consumed");
                 var body = ea.Body;
@@ -55,7 +55,7 @@ namespace NotificationEngine.Services
                 Console.WriteLine(notificationMessageAsJson);
                 Console.WriteLine(" [x] Received {0}", notificationMessageAsJson);
 
-				_notificationService.CreateNotification(notification);
+				await _notificationService.CreateNotification(notification);
 				_broadcaster.BroadcastNotifications(notification);
             };
 
