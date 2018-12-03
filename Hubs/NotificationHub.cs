@@ -7,7 +7,7 @@ namespace Notifications.Hubs
     {
         public NotificationsHub()
         {
-
+            
         }
     }
 }
