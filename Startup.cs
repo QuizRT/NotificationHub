@@ -56,7 +56,7 @@ namespace NotificationEngine
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env
-		//, NotificationConsumerService notificationService
+		, NotificationConsumerService notificationService
 		)
         {
             if (env.IsDevelopment())
@@ -79,7 +79,7 @@ namespace NotificationEngine
             {
                 routes.MapHub<NotificationHub>("/notifications");
             });
-             app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
