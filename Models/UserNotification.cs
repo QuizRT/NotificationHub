@@ -13,6 +13,5 @@ namespace NotificationEngine.Models
 
 
 		public Notification Notification { get; set; }
-		public User User { get; set; }
 	}
 }

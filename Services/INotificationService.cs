@@ -12,7 +12,7 @@ namespace NotificationEngine.Services
 
 	public interface IReadNotificationService
 	{
-		Task<IEnumerable<UserNotification>> GetNotifications(string UserId);
+		Task<List<UserNotification>> GetNotifications(string UserId);
 
 	}
 }

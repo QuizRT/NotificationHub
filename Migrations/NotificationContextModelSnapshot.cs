@@ -33,16 +33,6 @@ namespace NotificationEngine.Migrations
                     b.ToTable("Notifications");
                 });
 
-            modelBuilder.Entity("NotificationEngine.Models.User", b =>
-                {
-                    b.Property<string>("UserId")
-                        .ValueGeneratedOnAdd();
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("NotificationEngine.Models.UserNotification", b =>
                 {
                     b.Property<int>("Id")
@@ -55,16 +45,9 @@ namespace NotificationEngine.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Property<string>("UserId1");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("NotificationId")
-                        .IsUnique();
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
+                    b.HasIndex("NotificationId");
 
                     b.ToTable("UserNotifications");
                 });
@@ -72,17 +55,9 @@ namespace NotificationEngine.Migrations
             modelBuilder.Entity("NotificationEngine.Models.UserNotification", b =>
                 {
                     b.HasOne("NotificationEngine.Models.Notification", "Notification")
-                        .WithOne()
-                        .HasForeignKey("NotificationEngine.Models.UserNotification", "NotificationId")
+                        .WithMany("UserNotifications")
+                        .HasForeignKey("NotificationId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("NotificationEngine.Models.User")
-                        .WithMany("Notifications")
-                        .HasForeignKey("UserId");
-
-                    b.HasOne("NotificationEngine.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1");
                 });
 #pragma warning restore 612, 618
         }

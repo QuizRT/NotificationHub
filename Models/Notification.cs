@@ -13,10 +13,11 @@ namespace NotificationEngine.Models
 		public int NotificationId { get; set; }
 		public string Message { get; set; }
 		public string TargetUrl { get; set; }
-		public List<UserNotification> UserNotifications { get; set; }
 
 		[NotMapped]
 		public IList<string> Users { get; set; }
+
+		public List<UserNotification> UserNotifications { get; set; } = new List<UserNotification>();
 
 		public override string ToString()
 		{
@@ -25,7 +26,7 @@ namespace NotificationEngine.Models
 
 		public static Notification ToObject(string notification)
 		{
-			try 
+			try
 			{
 				Console.WriteLine("noexception");
 				Notification output = JsonConvert.DeserializeObject<Notification>(notification);
@@ -37,7 +38,7 @@ namespace NotificationEngine.Models
 				Console.WriteLine("Caught an Exception");
 				Console.WriteLine(e.Message);
 				return new Notification();
-			} 
+			}
 		}
 	}
 }

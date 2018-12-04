@@ -4,7 +4,6 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using NotificationEngine.Services;
 using NotificationEngine.Models;
-using NotificationEngine.Migrations;
 using NotificationEngine.Hubs;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
@@ -30,7 +29,7 @@ namespace Notifications.Controllers
             {
                 return Ok(notifications);
             }
-            else 
+            else
             {
                 return NotFound();
             }

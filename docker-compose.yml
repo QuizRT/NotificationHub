@@ -5,6 +5,8 @@ services:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: yourStrong(!)Password
     image: microsoft/mssql-server-linux
+    ports:
+      - "1433"
     networks:
       - notification-service-network
   notifications:

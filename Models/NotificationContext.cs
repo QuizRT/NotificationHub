@@ -11,12 +11,13 @@ namespace NotificationEngine.Models
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-			modelBuilder.Entity<User>().HasMany(n => n.Notifications).WithOne().HasForeignKey(n => n.UserId);
-            modelBuilder.Entity<UserNotification>().HasOne(n => n.Notification).WithMany(n => n.UserNotifications).HasForeignKey(u => u.NotificationId);
+			modelBuilder.Entity<Notification>()
+				.HasMany(n => n.UserNotifications)
+				.WithOne(n => n.Notification)
+				.HasForeignKey(u => u.NotificationId);
         }
 
 		public DbSet<Notification> Notifications { get; set; }
-		public DbSet<User> Users { get; set; }
 		public DbSet<UserNotification> UserNotifications { get; set; }
     }
 }
