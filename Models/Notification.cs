@@ -15,7 +15,7 @@ namespace NotificationEngine.Models
 		public string TargetUrl { get; set; }
 
 		[NotMapped]
-		public List<string> Users { get; set; }
+		public IList<string> Users { get; set; }
 
 		public override string ToString()
 		{
