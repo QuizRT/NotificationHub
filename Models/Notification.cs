@@ -32,6 +32,7 @@ namespace NotificationEngine.Models
 			}
 			catch (Exception e)
 			{
+				Console.WriteLine("Caught an Exception");
 				Console.WriteLine(e.Message);
 				return new Notification();
 			} 
