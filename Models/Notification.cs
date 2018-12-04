@@ -13,6 +13,7 @@ namespace NotificationEngine.Models
 		public int NotificationId { get; set; }
 		public string Message { get; set; }
 		public string TargetUrl { get; set; }
+		public List<UserNotification> UserNotifications { get; set; }
 
 		[NotMapped]
 		public IList<string> Users { get; set; }
