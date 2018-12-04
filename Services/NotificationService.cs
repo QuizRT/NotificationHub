@@ -25,6 +25,7 @@ namespace NotificationEngine.Services
 			Console.WriteLine("Notification Saved");
             foreach (var user in notification.Users)
 			{
+				_context.Users.Add(new User() { UserId = user });
 				var userNotification = new UserNotification()
 				{
 					Notification = notification,
