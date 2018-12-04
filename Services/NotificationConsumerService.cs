@@ -14,12 +14,13 @@ namespace NotificationEngine.Services
 	public class NotificationConsumerService
 	{
 		private NotificationBroadcaster _broadcaster;
-		private NotificationService _notificationService;
+		private ICreateNotificationService _notificationService;
 
 		public NotificationConsumerService(NotificationBroadcaster broadcaster, ICreateNotificationService notificationService)
 		{
 			Console.WriteLine("Consumer Service");
 			_broadcaster = broadcaster;
+			_notificationService = notificationService;
 			this.Consume();
 		}
 
