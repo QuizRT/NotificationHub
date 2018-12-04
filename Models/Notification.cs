@@ -26,8 +26,9 @@ namespace NotificationEngine.Models
 		{
 			try 
 			{
-				Console.WriteLine("exception");
-				return JsonConvert.DeserializeObject<Notification>(notification);
+				Console.WriteLine("noexception");
+				Notification output = JsonConvert.DeserializeObject<Notification>(notification);
+				return output;
 			}
 			catch (Exception e)
 			{
