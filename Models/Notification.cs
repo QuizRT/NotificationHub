@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
+using NotificationEngine.Services;
 
 namespace NotificationEngine.Models
 {
@@ -25,6 +26,7 @@ namespace NotificationEngine.Models
 		{
 			try 
 			{
+				Console.WriteLine("exception");
 				return JsonConvert.DeserializeObject<Notification>(notification);
 			}
 			catch (Exception e)
