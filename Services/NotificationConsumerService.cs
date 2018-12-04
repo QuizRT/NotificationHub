@@ -51,7 +51,8 @@ namespace NotificationEngine.Services
                 var notificationMessageAsJson = Encoding.UTF8.GetString(body);
 				Console.WriteLine(notificationMessageAsJson);
 				// var notification = JsonConvert.DeserializeObject<Notification>(notificationMessageAsJson);
-				var notification = Notification.ToObject(notificationMessageAsJson);
+				var notification = new Notification();
+				notification = Notification.ToObject(notificationMessageAsJson);
                 Console.WriteLine(notificationMessageAsJson);
                 Console.WriteLine(" [x] Received {0}", notificationMessageAsJson);
 				Console.WriteLine("notification", notification);
