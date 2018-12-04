@@ -25,17 +25,20 @@ namespace NotificationEngine.Services
 			Console.WriteLine("Notification Saved");
             foreach (var user in notification.Users)
 			{
-				if (!await _context.Users.ContainsAsync(new User() { UserId = user }))
-				{
-					_context.Users.Add(new User() { UserId = user });
-				}
 				var userNotification = new UserNotification()
 				{
 					Notification = notification,
 					UserId = user,
 					HasRead = false,
 				};
-				_context.UserNotifications.Add(userNotification);
+				if (!await _context.Users.ContainsAsync(new User() { UserId = user }))
+				{
+					_context.Users.Add(new User() { UserId = user, Notifications = new List<UserNotification>() { userNotification } });
+				}
+				else
+				{
+					_context.UserNotifications.Add(userNotification);
+				}
 			}
 			await _context.SaveChangesAsync();
 			Console.WriteLine("Notification Saved");
