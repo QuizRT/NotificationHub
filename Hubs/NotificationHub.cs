@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ namespace NotificationEngine.Hubs
 
 		public void Init(string userId)
 		{
+			Console.WriteLine("Registered with UserId");
+			Console.WriteLine(userId);
 			ConnectedClients.Add(userId, Context.ConnectionId);
 		}
 
