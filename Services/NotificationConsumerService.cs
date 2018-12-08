@@ -52,16 +52,25 @@ namespace NotificationEngine.Services
                 var notificationMessageAsJson = Encoding.UTF8.GetString(body);
 				using (var serviceScope = this._serviceProvider.CreateScope())
 				{
-					Notification notification = Notification.ToObject(notificationMessageAsJson);
-					Console.WriteLine(notificationMessageAsJson);
-					// var notification = JsonConvert.DeserializeObject<Notification>(notificationMessageAsJson);
-					Console.WriteLine(notificationMessageAsJson);
-					Console.WriteLine(" [x] Received {0}", notificationMessageAsJson);
-					Console.WriteLine("notification", notification);
-					Console.WriteLine(notification.Message);			
-					var notificationService = serviceScope.ServiceProvider.GetRequiredService<ICreateNotificationService>();
-					await notificationService.CreateNotification(notification);
-					_broadcaster.BroadcastNotifications(notification);
+					try 
+					{
+						Notification notification = Notification.ToObject(notificationMessageAsJson);
+						Console.WriteLine(notificationMessageAsJson);
+						// var notification = JsonConvert.DeserializeObject<Notification>(notificationMessageAsJson);
+						Console.WriteLine(notificationMessageAsJson);
+						Console.WriteLine(" [x] Received {0}", notificationMessageAsJson);
+						Console.WriteLine("notification", notification);
+						Console.WriteLine(notification.Message);			
+						var notificationService = serviceScope.ServiceProvider.GetRequiredService<ICreateNotificationService>();
+						await notificationService.CreateNotification(notification);
+						_broadcaster.BroadcastNotifications(notification);
+					}
+					catch(Exception e)
+					{
+						Console.WriteLine("Error in Consumer Service");
+						Console.WriteLine(e.StackTrace);
+						Console.WriteLine(e.Message);
+					}
 				}
             };
 

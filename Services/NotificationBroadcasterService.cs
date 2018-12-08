@@ -21,9 +21,18 @@ namespace NotificationEngine.Services
 
 		public void BroadcastNotifications(Notification notification)
 		{
-			Console.WriteLine("Broadcasting Notifications");
-			var connectedClients = notification.Users.Select(userId => NotificationHub.ConnectedClients.GetValueOrDefault(userId, "")).Where(u => u != "").ToList();
-			_notificationHubContext.Clients.Clients(connectedClients).SendAsync("notification", notification);
+			try 
+			{
+				Console.WriteLine("Broadcasting Notifications");
+				var connectedClients = notification.Users.Select(userId => NotificationHub.ConnectedClients.GetValueOrDefault(userId, "")).Where(u => u != "").ToList();
+				_notificationHubContext.Clients.Clients(connectedClients).SendAsync("notification", notification);
+			}
+			catch (Exception e) 
+			{
+				Console.WriteLine("Error in Broadcaster");
+				Console.WriteLine(e.Message);
+				Console.WriteLine(e.StackTrace);
+			}
 		}
 	}
 }
