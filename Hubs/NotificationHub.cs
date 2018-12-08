@@ -23,7 +23,7 @@ namespace NotificationEngine.Hubs
 		{
 			Console.WriteLine("Registered with UserId");
 			Console.WriteLine(userId);
-			ConnectedClients.Add(userId, Context.ConnectionId);
+			ConnectedClients.Add(Context.ConnectionId, userId);
 		}
 
 		public async Task GetNotifications()
