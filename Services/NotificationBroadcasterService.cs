@@ -14,10 +14,8 @@ namespace NotificationEngine.Services
 	public class NotificationBroadcaster
 	{
 		private IHubContext<NotificationHub> _notificationHubContext;
-		private IHubClients<NotificationHub> _clients;
-		public NotificationBroadcaster(IHubContext<NotificationHub> notificationHubContext, IHubClients<NotificationHub> clients)
+		public NotificationBroadcaster(IHubContext<NotificationHub> notificationHubContext)
 		{
-			_clients = clients;
 			_notificationHubContext = notificationHubContext;
 		}
 
