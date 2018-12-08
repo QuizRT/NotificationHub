@@ -16,11 +16,10 @@ namespace NotificationEngine.Services
 		private IServiceProvider _serviceProvider;
 		private NotificationBroadcaster _broadcaster;
 
-		public NotificationConsumerService(IServiceProvider serviceProvider, NotificationBroadcaster broadcaster)
+		public NotificationConsumerService(IServiceProvider serviceProvider)
 		{
 			Console.WriteLine("Consumer Service");
 			_serviceProvider = serviceProvider;
-			_broadcaster = broadcaster;
 			this.Consume();
 		}
 
@@ -62,8 +61,9 @@ namespace NotificationEngine.Services
 						Console.WriteLine("notification", notification);
 						Console.WriteLine(notification.Message);			
 						var notificationService = serviceScope.ServiceProvider.GetRequiredService<ICreateNotificationService>();
+						var broadcasterService = serviceScope.ServiceProvider.GetRequiredService<NotificationBroadcaster>();
 						await notificationService.CreateNotification(notification);
-						await _broadcaster.BroadcastNotifications(notification);
+						await broadcasterService.BroadcastNotifications(notification);
 					}
 					catch(Exception e)
 					{

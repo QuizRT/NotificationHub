@@ -40,7 +40,7 @@ namespace NotificationEngine
 
 			services.AddScoped<IReadNotificationService, NotificationService>();
 			services.AddScoped<ICreateNotificationService, NotificationService>();
-			services.AddSingleton<NotificationBroadcaster>();
+			services.AddScoped<NotificationBroadcaster>();
 			services.AddSingleton<NotificationConsumerService>();
 
 			services.AddDbContext<NotificationContext>(option => option.UseSqlServer(connectionString));
