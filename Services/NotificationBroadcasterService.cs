@@ -30,8 +30,7 @@ namespace NotificationEngine.Services
 					Console.WriteLine(client);
 				}
 				Console.WriteLine(connectedClients.Count);
-				await _notificationHubContext.Clients.Users(connectedClients).SendAsync("notification", new { test = "Value4" });
-				await _notificationHubContext.Clients.All.SendAsync("notification", new { test = "Value3" });
+				await _notificationHubContext.Clients.All.SendAsync("notification", new { message = notification.Message, targetUrl = notification.TargetUrl });
 			}
 			catch (Exception e) 
 			{
