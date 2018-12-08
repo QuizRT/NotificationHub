@@ -35,11 +35,11 @@ namespace NotificationEngine
             var connectionString = Environment.GetEnvironmentVariable("SQLSERVER_HOST") ?? "Server=localhost\\SQLEXPRESS;Database=NotificationDb;Trusted_Connection=True;";
 
 
-			var dbContextOptions = new DbContextOptionsBuilder<NotificationContext>().UseSqlServer(connectionString).Options;
-			var notificationContext = new NotificationContext(dbContextOptions);
+			// var dbContextOptions = new DbContextOptionsBuilder<NotificationContext>().UseSqlServer(connectionString).Options;
+			// var notificationContext = new NotificationContext(dbContextOptions);
 
 			services.AddScoped<IReadNotificationService, NotificationService>();
-			services.AddSingleton<ICreateNotificationService>(s => new NotificationService(notificationContext));
+			services.AddScoped<ICreateNotificationService, NotificationService>();
 			services.AddSingleton<NotificationBroadcaster>();
 			services.AddSingleton<NotificationConsumerService>();
 

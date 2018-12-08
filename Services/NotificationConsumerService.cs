@@ -13,14 +13,15 @@ namespace NotificationEngine.Services
 {
 	public class NotificationConsumerService
 	{
+		private IServiceProvider _serviceProvider;
 		private NotificationBroadcaster _broadcaster;
 		private ICreateNotificationService _notificationService;
 
-		public NotificationConsumerService(NotificationBroadcaster broadcaster, ICreateNotificationService notificationService)
+		public NotificationConsumerService(IServiceProvider serviceProvider, NotificationBroadcaster broadcaster)
 		{
 			Console.WriteLine("Consumer Service");
+			_serviceProvider = serviceProvider;
 			_broadcaster = broadcaster;
-			_notificationService = notificationService;
 			this.Consume();
 		}
 
@@ -50,15 +51,19 @@ namespace NotificationEngine.Services
 				Console.WriteLine("Consumed");
                 var body = ea.Body;
                 var notificationMessageAsJson = Encoding.UTF8.GetString(body);
-				Console.WriteLine(notificationMessageAsJson);
-				// var notification = JsonConvert.DeserializeObject<Notification>(notificationMessageAsJson);
-				Notification notification = Notification.ToObject(notificationMessageAsJson);
-                Console.WriteLine(notificationMessageAsJson);
-                Console.WriteLine(" [x] Received {0}", notificationMessageAsJson);
-				Console.WriteLine("notification", notification);
-				Console.WriteLine(notification.Message);			
-				await _notificationService.CreateNotification(notification);
-				_broadcaster.BroadcastNotifications(notification);
+				using (var serviceScope = this._serviceProvider.CreateScope())
+				{
+					Notification notification = Notification.ToObject(notificationMessageAsJson);
+					Console.WriteLine(notificationMessageAsJson);
+					// var notification = JsonConvert.DeserializeObject<Notification>(notificationMessageAsJson);
+					Console.WriteLine(notificationMessageAsJson);
+					Console.WriteLine(" [x] Received {0}", notificationMessageAsJson);
+					Console.WriteLine("notification", notification);
+					Console.WriteLine(notification.Message);			
+					var notificationService = serviceScope.ServiceProvider.GetRequiredService<ICreateNotificationService>();
+					await _notificationService.CreateNotification(notification);
+					_broadcaster.BroadcastNotifications(notification);
+				}
             };
 
             channel.BasicConsume(queue: "Notification", autoAck: true, consumer: consumer);
