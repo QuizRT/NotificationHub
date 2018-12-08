@@ -13,9 +13,5 @@ namespace NotificationEngine.Models
 		public int NotificationId { get; set; }
 
 		public Notification Notification { get; set; }
-
-		public override string ToString() {
-			return JsonConvert.SerializeObject(this);
-		}
 	}
 }

@@ -19,11 +19,6 @@ namespace NotificationEngine.Models
 
 		public List<UserNotification> UserNotifications { get; set; } = new List<UserNotification>();
 
-		public override string ToString()
-		{
-			return JsonConvert.SerializeObject(this);
-		}
-
 		public static Notification ToObject(string notification)
 		{
 			try
