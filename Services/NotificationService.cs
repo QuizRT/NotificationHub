@@ -23,11 +23,21 @@ namespace NotificationEngine.Services
 
         public async Task CreateNotification(Notification notification)
         {
-			var userNotifications = notification.Users.Select((u) => new UserNotification() { UserId = u, HasRead = false });
-			notification.UserNotifications.AddRange(userNotifications);
-			await _context.Notifications.AddAsync(notification);
-			await _context.SaveChangesAsync();
-			Console.WriteLine("Notification Saved");
+			try 
+			{
+
+				var userNotifications = notification.Users.Select((u) => new UserNotification() { UserId = u, HasRead = false });
+				notification.UserNotifications.AddRange(userNotifications);
+				await _context.Notifications.AddAsync(notification);
+				await _context.SaveChangesAsync();
+				Console.WriteLine("Notification Saved");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("Create Notification Service");
+				Console.WriteLine(e.Message);
+				Console.WriteLine(e.StackTrace);
+			}
         }
     }
 }
