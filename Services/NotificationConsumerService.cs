@@ -30,7 +30,8 @@ namespace NotificationEngine.Services
 				HostName = "rabbitmq",
 				Port = 5672,
 				UserName = "rabbitmq",
-				Password = "rabbitmq"
+				Password = "rabbitmq",
+				DispatchConsumersAsync = true
 			};
             var connection = factory.CreateConnection();
             var channel = connection.CreateModel();
