@@ -19,7 +19,7 @@ namespace NotificationEngine.Services
 			_notificationHubContext = notificationHubContext;
 		}
 
-		public void BroadcastNotifications(Notification notification)
+		public async Task BroadcastNotifications(Notification notification)
 		{
 			try 
 			{
@@ -30,7 +30,7 @@ namespace NotificationEngine.Services
 					Console.WriteLine(client);
 				}
 				Console.WriteLine(connectedClients.Count);
-				_notificationHubContext.Clients.Clients(connectedClients).SendAsync("notification", notification);
+				await _notificationHubContext.Clients.Clients(connectedClients).SendAsync("notification", notification);
 			}
 			catch (Exception e) 
 			{
