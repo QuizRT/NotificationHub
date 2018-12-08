@@ -24,7 +24,7 @@ namespace NotificationEngine.Services
 			try 
 			{
 				Console.WriteLine("Broadcasting Notifications");
-				var connectedClients = notification.Users.Select(userId => NotificationHub.ConnectedClients.FirstOrDefault(x => x.Value == userId).Key).ToList();
+				var connectedClients = notification.Users.SelectMany(userId => NotificationHub.ConnectedClients.Where(x => x.Value == userId).Select(x => x.Key)).ToList();
 				foreach(var client in connectedClients)
 				{
 					Console.WriteLine(client);
