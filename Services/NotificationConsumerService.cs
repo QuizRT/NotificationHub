@@ -63,7 +63,7 @@ namespace NotificationEngine.Services
 						Console.WriteLine(notification.Message);			
 						var notificationService = serviceScope.ServiceProvider.GetRequiredService<ICreateNotificationService>();
 						await notificationService.CreateNotification(notification);
-						_broadcaster.BroadcastNotifications(notification);
+						await _broadcaster.BroadcastNotifications(notification);
 					}
 					catch(Exception e)
 					{
