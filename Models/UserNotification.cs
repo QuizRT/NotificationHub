@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
 namespace NotificationEngine.Models
@@ -11,7 +12,10 @@ namespace NotificationEngine.Models
 		public string UserId { get; set; }
 		public int NotificationId { get; set; }
 
-
 		public Notification Notification { get; set; }
+
+		public override string ToString() {
+			return JsonConvert.SerializeObject(this);
+		}
 	}
 }
