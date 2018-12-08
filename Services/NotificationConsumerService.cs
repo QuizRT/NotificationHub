@@ -44,7 +44,7 @@ namespace NotificationEngine.Services
 				arguments: null
 			);
 
-            var consumer = new EventingBasicConsumer(channel);
+            var consumer = new AsyncEventingBasicConsumer(channel);
             consumer.Received += async (model, ea) =>
             {
 				Console.WriteLine("Consumed");
