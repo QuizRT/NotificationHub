@@ -19,12 +19,13 @@ namespace NotificationEngine.Hubs
 			_notificationService = notificationService;
         }
 
-		public void Init(string userId)
+		public async Task Init(string userId)
 		{
 			Console.WriteLine("Registered with UserId");
 			Console.WriteLine(userId);
 			Console.WriteLine(Context.ConnectionId);
 			ConnectedClients.Add(Context.ConnectionId, userId);
+			await Clients.Caller.SendAsync("notification", new { test = "value" });
 		}
 
 		public async Task GetNotifications()
