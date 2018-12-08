@@ -14,8 +14,10 @@ namespace NotificationEngine.Services
 	public class NotificationBroadcaster
 	{
 		private IHubContext<NotificationHub> _notificationHubContext;
-		public NotificationBroadcaster(IHubContext<NotificationHub> notificationHubContext)
+		private IHubClients<NotificationHub> _clients;
+		public NotificationBroadcaster(IHubContext<NotificationHub> notificationHubContext, IHubClients<NotificationHub> clients)
 		{
+			_clients = clients;
 			_notificationHubContext = notificationHubContext;
 		}
 
@@ -30,6 +32,7 @@ namespace NotificationEngine.Services
 					Console.WriteLine(client);
 				}
 				Console.WriteLine(connectedClients.Count);
+				await _notificationHubContext.Clients.Users(connectedClients).SendAsync("notification", notification);
 				await _notificationHubContext.Clients.All.SendAsync("notification", notification).ConfigureAwait(false);
 			}
 			catch (Exception e) 
