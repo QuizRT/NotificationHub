@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.SignalR;
 
 using NotificationEngine.Hubs;
 using NotificationEngine.Models;
+using RabbitMQ.Client;
+using System.Text;
 
 namespace NotificationEngine.Services
 {

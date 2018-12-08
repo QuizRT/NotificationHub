@@ -15,7 +15,7 @@ namespace NotificationEngine.Models
 		public string TargetUrl { get; set; }
 
 		[NotMapped]
-		public IList<string> Users { get; set; }
+		public List<string> Users { get; set; }
 
 		public List<UserNotification> UserNotifications { get; set; } = new List<UserNotification>();
 
