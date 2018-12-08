@@ -17,7 +17,7 @@ namespace NotificationEngine.Services
 		public async Task<List<UserNotification>> GetNotifications(string userId)
 		{
 
-			var userNotifications = await _context.UserNotifications.Where(u => u.UserId == userId).Include("Notifications").ToListAsync();
+			var userNotifications = await _context.UserNotifications.Where(u => u.UserId == userId).Include("Notification").ToListAsync();
 			return userNotifications;
 		}
 
