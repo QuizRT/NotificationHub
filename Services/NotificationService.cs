@@ -23,11 +23,8 @@ namespace NotificationEngine.Services
 
         public async Task CreateNotification(Notification notification)
         {
-			Console.WriteLine(notification.ToString());
 			var userNotifications = notification.Users.Select((u) => new UserNotification() { UserId = u, HasRead = false });
-			Console.WriteLine(userNotifications);
 			notification.UserNotifications.AddRange(userNotifications);
-			Console.WriteLine(notification);
 			await _context.Notifications.AddAsync(notification);
 			await _context.SaveChangesAsync();
 			Console.WriteLine("Notification Saved");
